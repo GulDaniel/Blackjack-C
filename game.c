@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+//prototypes
+void sum_card(int *sum, char card);
+
 int
 main (int argc, char **argv)
 {
@@ -52,92 +55,13 @@ main (int argc, char **argv)
       printf ("%c ", deck[l]);
     }
 
-  //start the game
-  for (int n = 51; n >= 50; n--)
-    {
-      switch (deck[n])
-	{
-	case 'A':
-	  player += 1;
-	  break;
-	case '2':
-	  player += 2;
-	  break;
-	case '3':
-	  player += 3;
-	  break;
-	case '4':
-	  player += 4;
-	  break;
-	case '5':
-	  player += 5;
-	  break;
-	case '6':
-	  player += 6;
-	  break;
-	case '7':
-	  player += 7;
-	  break;
-	case '8':
-	  player += 8;
-	  break;
-	case '9':
-	  player += 9;
-	  break;
-	case 'T':
-	  player += 10;
-	  break;
-	case 'Q':
-	  player += 10;
-	  break;
-	case 'K':
-	  player += 10;
-	  break;
-	}
-    }
-
-  for (int o = 49; o >= 48; o--)
-    {
-      switch (deck[o])
-	{
-	case 'A':
-	  cmp += 1;
-	  break;
-	case '2':
-	  cmp += 2;
-	  break;
-	case '3':
-	  cmp += 3;
-	  break;
-	case '4':
-	  cmp += 4;
-	  break;
-	case '5':
-	  cmp += 5;
-	  break;
-	case '6':
-	  cmp += 6;
-	  break;
-	case '7':
-	  cmp += 7;
-	  break;
-	case '8':
-	  cmp += 8;
-	  break;
-	case '9':
-	  cmp += 9;
-	  break;
-	case 'T':
-	  cmp += 10;
-	  break;
-	case 'Q':
-	  cmp += 10;
-	  break;
-	case 'K':
-	  cmp += 10;
-	  break;
-	}
-    }
+  //player cards
+    sum_card(&player, deck[51]);
+    sum_card(&player, deck[50]);
+    
+  //cmp cards
+    sum_card(&cmp, deck[49]);
+    sum_card(&cmp, deck[48]);
 
   while (opc != 3)
     {
@@ -148,45 +72,7 @@ main (int argc, char **argv)
       switch (opc)
 	{
 	case 1:
-	  switch (deck[deck_pos])
-	    {
-	    case 'A':
-	      player += 1;
-	      break;
-	    case '2':
-	      player += 2;
-	      break;
-	    case '3':
-	      player += 3;
-	      break;
-	    case '4':
-	      player += 4;
-	      break;
-	    case '5':
-	      player += 5;
-	      break;
-	    case '6':
-	      player += 6;
-	      break;
-	    case '7':
-	      player += 7;
-	      break;
-	    case '8':
-	      player += 8;
-	      break;
-	    case '9':
-	      player += 9;
-	      break;
-	    case 'T':
-	      player += 10;
-	      break;
-	    case 'Q':
-	      player += 10;
-	      break;
-	    case 'K':
-	      player += 10;
-	      break;
-	    }
+	  sum_card(&player, deck[deck_pos]);
 	  deck_pos--;
 	  break;
 	case 2:
@@ -199,4 +85,29 @@ main (int argc, char **argv)
     }
 
   return 0;
+}
+
+void sum_card(int *sum, char card){
+    if (card == 'A')
+	{
+	  *sum += 1;
+	}else if (card == '2'){
+	  *sum += 2;
+    }else if (card == '3'){
+	  *sum += 3;
+    }else if (card == '4'){
+	  *sum += 4;
+    }else if (card == '5'){
+	  *sum += 5;
+    }else if (card == '6'){
+	  *sum += 6;
+    }else if (card == '7'){
+	  *sum += 7;
+    }else if (card == '8'){
+	  *sum += 8;
+    }else if (card == '9'){
+	  *sum += 9;
+    }else {
+      *sum += 10;
+    }
 }
