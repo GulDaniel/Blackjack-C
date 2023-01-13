@@ -3,14 +3,15 @@
 #include <time.h>
 
 //prototypes
-void sum_card(int *sum, char card);
+void shuffle_cards (char v[]);
+void sum_card (int *sum, char card);
 
 int
 main (int argc, char **argv)
 {
 
   srand (time (NULL));
-  char tmp, deck[52], cards[13] =
+  char deck[52], cards[13] =
     { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K' };
 
   int k = 0, opc = 0, player = 0, cmp = 0, deck_pos = 47;
@@ -40,13 +41,7 @@ main (int argc, char **argv)
     }
 
   //shufle the deck
-  for (int m = 0; m <= 51; m++)
-    {
-      int pos = rand () % 52;
-      tmp = deck[m];
-      deck[m] = deck[pos];
-      deck[pos] = tmp;
-    }
+  shuffle_cards (deck);
 
   //show shuffle deck
   printf ("\n");
@@ -56,12 +51,12 @@ main (int argc, char **argv)
     }
 
   //player cards
-    sum_card(&player, deck[51]);
-    sum_card(&player, deck[50]);
-    
+  sum_card (&player, deck[51]);
+  sum_card (&player, deck[50]);
+
   //cmp cards
-    sum_card(&cmp, deck[49]);
-    sum_card(&cmp, deck[48]);
+  sum_card (&cmp, deck[49]);
+  sum_card (&cmp, deck[48]);
 
   while (opc != 3)
     {
@@ -72,7 +67,7 @@ main (int argc, char **argv)
       switch (opc)
 	{
 	case 1:
-	  sum_card(&player, deck[deck_pos]);
+	  sum_card (&player, deck[deck_pos]);
 	  deck_pos--;
 	  break;
 	case 2:
@@ -87,27 +82,63 @@ main (int argc, char **argv)
   return 0;
 }
 
-void sum_card(int *sum, char card){
-    if (card == 'A')
-	{
-	  *sum += 1;
-	}else if (card == '2'){
-	  *sum += 2;
-    }else if (card == '3'){
-	  *sum += 3;
-    }else if (card == '4'){
-	  *sum += 4;
-    }else if (card == '5'){
-	  *sum += 5;
-    }else if (card == '6'){
-	  *sum += 6;
-    }else if (card == '7'){
-	  *sum += 7;
-    }else if (card == '8'){
-	  *sum += 8;
-    }else if (card == '9'){
-	  *sum += 9;
-    }else {
+//shuffle cards
+void
+shuffle_cards (char v[])
+{
+  char tmp;
+  for (int m = 0; m <= 51; m++)
+    {
+      int pos = rand () % 52;
+      tmp = v[m];
+      v[m] = v[pos];
+      v[pos] = tmp;
+    }
+}
+
+//add cards to sum
+void
+sum_card (int *sum, char card)
+{
+  if (card == 'A')
+    {
+      *sum += 1;
+    }
+  else if (card == '2')
+    {
+      *sum += 2;
+    }
+  else if (card == '3')
+    {
+      *sum += 3;
+    }
+  else if (card == '4')
+    {
+      *sum += 4;
+    }
+  else if (card == '5')
+    {
+      *sum += 5;
+    }
+  else if (card == '6')
+    {
+      *sum += 6;
+    }
+  else if (card == '7')
+    {
+      *sum += 7;
+    }
+  else if (card == '8')
+    {
+      *sum += 8;
+    }
+  else if (card == '9')
+    {
+      *sum += 9;
+    }
+  else
+    {
       *sum += 10;
     }
 }
+
